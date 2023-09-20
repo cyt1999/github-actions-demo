@@ -17,20 +17,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+      uses: actions/checkout@v4 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
       # with:
       #   persist-credentials: false
-      
+    
     - name: Fetch dependent repository  
       run: |  
         echo ${{ inputs.repositories }}
-        git clone https://github.com/cyt1999/kube-prometheus.git
+        git clone ${{ inputs.repositories }}
         # 如果需要，您可以将克隆的仓库移动到适当的目录  
         # mv png_nft_generator /path/to/destination
 
+    - name: Install Rust
+      uses: dtolnay/rust-toolchain@stable
+      
     - name: Install and Build
       run: |
         ls 
         pwd
         echo "cargo build --target wasm32-wasi"
+        rustup -V
+        cargo version
+
 
