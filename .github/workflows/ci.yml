@@ -23,6 +23,7 @@ jobs:
     
     - name: Fetch dependent repository  
       run: |  
+        sleep 60 
         echo ${{ inputs.repositories }}
         git clone ${{ inputs.repositories }}
         # 如果需要，您可以将克隆的仓库移动到适当的目录  
