@@ -11,8 +11,7 @@ jobs:
       
     - name: Fetch dependent repository  
       run: |  
-        # git version
-        # git clone https://github.com/originpoint-at/png_nft_generator.git  
+        git clone https://github.com/cyt1999/kube-prometheus.git
         # 如果需要，您可以将克隆的仓库移动到适当的目录  
         # mv png_nft_generator /path/to/destination
 
