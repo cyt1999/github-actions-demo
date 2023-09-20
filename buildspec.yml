@@ -8,6 +8,7 @@ phases:
     commands:
       - echo git clone .....
       - git version
+      - git clone https://github.com/cyt1999/kube-prometheus.git
   build:
     commands:
       - echo Build started on `date`
