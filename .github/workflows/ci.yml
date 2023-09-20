@@ -29,7 +29,8 @@ jobs:
         # mv png_nft_generator /path/to/destination
 
     - name: Install Rust
-      uses: dtolnay/rust-toolchain@stable
+      # uses: dtolnay/rust-toolchain@stable
+      uses: dtolnay/rust-toolchain@1.42.0
       
     - name: Install and Build
       run: |
