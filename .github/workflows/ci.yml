@@ -29,6 +29,7 @@ jobs:
         # 如果需要，您可以将克隆的仓库移动到适当的目录  
         # mv png_nft_generator /path/to/destination
         echo 状态 ${{ steps.clone_repository.outcome }}
+        echo ${{ steps }}
         
 
     - id: install_rust
