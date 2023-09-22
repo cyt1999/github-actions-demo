@@ -52,8 +52,7 @@ jobs:
         if ${{ steps.clone_repository.conclusion == 'failure' }} {  
           # 构建成功，发送通知  
           echo "Fetch dependent repository  "
-        }
-        if ${{ steps.build.conclusion == 'failure' }} {  
+        } else if ${{ steps.build.conclusion == 'failure' }} {  
           # 构建失败或跳过，发送通知  
           echo "Install and Build"
         }
