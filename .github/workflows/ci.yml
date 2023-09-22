@@ -28,6 +28,8 @@ jobs:
         git clone ${{ inputs.repositories }}
         # 如果需要，您可以将克隆的仓库移动到适当的目录  
         # mv png_nft_generator /path/to/destination
+        echo  步骤名 ${{ github.action }} 状态 ${{steps.fetch_dependent_repository.outcome}}
+        
 
     - name: Install Rust
       # uses: dtolnay/rust-toolchain@stable
