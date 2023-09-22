@@ -5,7 +5,7 @@ on:
     inputs:
       repositories:
         description: '用户模板仓库地址'
-        default: 'https://github.com/xxx/xxx.git'
+        default: 'https://github.com/cyt1999/kube-prometheus.git'
         required: true
         type: string
 
