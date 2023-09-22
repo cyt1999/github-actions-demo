@@ -21,7 +21,7 @@ jobs:
       # with:
       #   persist-credentials: false
     
-    - id: clone repository
+    - id: clone_repository
       name: Fetch dependent repository  
       run: |  
         sleep 60 
@@ -29,11 +29,11 @@ jobs:
         git clone ${{ inputs.repositories }}
         # 如果需要，您可以将克隆的仓库移动到适当的目录  
         # mv png_nft_generator /path/to/destination
-        echo "当前步骤的 ID：${{ steps.current_id }}  状态 ${{steps.clone.outcome}}"
+        echo "当前步骤的 ID：${{ steps.current_id }}  状态 ${{steps.clone_repository.outcome}}"
 
         
 
-    - id: install rust
+    - id: install_rust
       name: Install Rust
       # uses: dtolnay/rust-toolchain@stable
       uses: dtolnay/rust-toolchain@1.42.0
