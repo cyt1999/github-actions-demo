@@ -46,15 +46,14 @@ jobs:
         rustup -V
         cargo version
     
-    - name: The job has failed
-      if: ${{ failure() }}
+    - name: The clone_repository has failed
+      if: ${{ failure() && steps.clone_repository.conclusion == 'failure' }}
       run: |
-        if ${{ steps.clone_repository.conclusion == 'failure' }} {  
-          # 构建成功，发送通知  
-          echo "Fetch dependent repository  "
-        } else if ${{ steps.build.conclusion == 'failure' }} {  
-          # 构建失败或跳过，发送通知  
+        echo "Fetch dependent repository  "
+
+    - name: The build has failed
+      if: ${{ failure() && steps.build.conclusion == 'failure' }}
+      run: |
           echo "Install and Build"
-        }
 
 
