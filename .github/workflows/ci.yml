@@ -21,16 +21,15 @@ jobs:
       # with:
       #   persist-credentials: false
     
-    - name: Fetch dependent repository  
-      id: clone_repository
+    - id: clone_repository
+      name: Fetch dependent repository  
       run: |  
         echo ${{ inputs.repositories }}
         git clone ${{ inputs.repositories }}
         # 如果需要，您可以将克隆的仓库移动到适当的目录  
         # mv png_nft_generator /path/to/destination
-        echo 状态 ${{ steps.clone_repository.outcome }}
-        echo 状态 ${{ steps.clone_repository.conclusion }}
-        echo ${{ steps }}
+        exit 1
+
         
 
     - id: install_rust
@@ -46,5 +45,17 @@ jobs:
         echo "cargo build --target wasm32-wasi"
         rustup -V
         cargo version
+    
+    - name: The job has failed
+      if: ${{ failure() }}
+      run: |
+        if ${{ steps.clone_repository.conclusion == 'failure' }} {  
+          # 构建成功，发送通知  
+          echo "Fetch dependent repository  "
+        }
+        if ${{ steps.build.conclusion == 'failure' }} {  
+          # 构建失败或跳过，发送通知  
+          echo "Install and Build"
+        }
 
 
