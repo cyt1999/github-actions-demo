@@ -16,19 +16,20 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
+    - id: checkout
       uses: actions/checkout@v4 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
       # with:
       #   persist-credentials: false
     
-    - id: clone_repository
-      name: Fetch dependent repository  
+    - name: Fetch dependent repository  
+      id: clone_repository
       run: |  
         echo ${{ inputs.repositories }}
         git clone ${{ inputs.repositories }}
         # 如果需要，您可以将克隆的仓库移动到适当的目录  
         # mv png_nft_generator /path/to/destination
         echo 状态 ${{ steps.clone_repository.outcome }}
+        echo 状态 ${{ steps.clone_repository.conclusion }}
         echo ${{ steps }}
         
 
