@@ -15,7 +15,7 @@ env:
 jobs:
   build-and-deploy:
     # runs-on: ubuntu-latest
-    runs-on: aly_node
+    runs-on: self-hosted
     steps:
     - id: checkout
       uses: actions/checkout@v4 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
