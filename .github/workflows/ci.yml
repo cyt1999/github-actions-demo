@@ -36,13 +36,13 @@ jobs:
     #   # uses: dtolnay/rust-toolchain@stable
     #   uses: dtolnay/rust-toolchain@1.42.0
       
-    # - id: install_rust
-    #   name: Install Rust
-    #   uses: actions-rs/toolchain@v1
-    #   with:
-    #     profile: minimal
-    #     toolchain: stable
-    #     override: true
+    - id: install_rust
+      name: Install Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        toolchain: stable
+        override: true
       
     - id: build
       name: Install and Build
