@@ -22,13 +22,13 @@ jobs:
       # with:
       #   persist-credentials: false
     
-    - id: clone_repository
-      name: Fetch dependent repository  
-      run: |  
-        echo ${{ inputs.repositories }}
-        git clone ${{ inputs.repositories }}
-        # 如果需要，您可以将克隆的仓库移动到适当的目录  
-        # mv png_nft_generator /path/to/destination
+    # - id: clone_repository
+    #   name: Fetch dependent repository  
+    #   run: |  
+    #     echo ${{ inputs.repositories }}
+    #     git clone ${{ inputs.repositories }}
+    #     # 如果需要，您可以将克隆的仓库移动到适当的目录  
+    #     # mv png_nft_generator /path/to/destination
         
 
     # - id: install_rust
@@ -36,13 +36,13 @@ jobs:
     #   # uses: dtolnay/rust-toolchain@stable
     #   uses: dtolnay/rust-toolchain@1.42.0
       
-    - id: install_rust
-      name: Install Rust
-      uses: actions-rs/toolchain@v1
-      with:
-        profile: minimal
-        toolchain: stable
-        override: true
+    # - id: install_rust
+    #   name: Install Rust
+    #   uses: actions-rs/toolchain@v1
+    #   with:
+    #     profile: minimal
+    #     toolchain: stable
+    #     override: true
       
     - id: build
       name: Install and Build
