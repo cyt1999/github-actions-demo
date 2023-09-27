@@ -35,17 +35,17 @@ jobs:
         # 对拉取的模板库重命名 
         # mv png_nft_generator png_nft_csv_template     
 
-    # - id: install_rust
-    #   name: Install Rust
-    #   # uses: dtolnay/rust-toolchain@stable
-    #   uses: dtolnay/rust-toolchain@1.42.0
-      
+    
     - name: Install Rust
-      uses: actions-rs/toolchain@v1
-      with:
-        profile: minimal
-        toolchain: stable
-        override: true
+      uses: dtolnay/rust-toolchain@stable
+      # uses: dtolnay/rust-toolchain@1.42.0
+      
+    # - name: Install Rust
+    #   uses: actions-rs/toolchain@v1
+    #   with:
+    #     profile: minimal
+    #     toolchain: stable
+    #     override: true
 
     - id: check
       name: check template repository
