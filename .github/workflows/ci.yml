@@ -24,7 +24,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - id: checkout
+    - name: checkout
       uses: actions/checkout@v4
     
     - id: clone_repository
@@ -40,23 +40,35 @@ jobs:
     #   # uses: dtolnay/rust-toolchain@stable
     #   uses: dtolnay/rust-toolchain@1.42.0
       
-    - id: install_rust
-      name: Install Rust
+    - name: Install Rust
       uses: actions-rs/toolchain@v1
       with:
         profile: minimal
         toolchain: stable
         override: true
-      
+
+    - id: check
+      name: check template repository
+      run: |
+        echo "cargo build --target wasm32-wasi"
+        rustup -V
+        cargo version
+        
     - id: build
       name: Install and Build
       run: |
         echo "cargo build --target wasm32-wasi"
         rustup -V
         cargo version
+
+    #状态检查
     
-    # 成功通知
-    - name: The clone_repository has failed
+    - name: The job has succeeded
+      if: ${{ success() }}
+      run: |
+        echo "success"
+        
+    - name: The clone repository has failed
       if: ${{ failure() && steps.clone_repository.conclusion == 'failure' }}
       run: |
         echo "Fetch dependent repository  "
