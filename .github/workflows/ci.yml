@@ -1,59 +1,61 @@
-name: GitHub Actions Build and Deploy Demo
+name: Build and Deploy 
 
 on: 
   workflow_dispatch:
     inputs:
+      token:
+        description: 'token'
+        default: 'latest'
+        required: true
+        type: string
       repositories:
-        description: '用户模板仓库地址'
+        description: 'repositories'
         default: 'https://github.com/cyt1999/kube-prometheus.git'
         required: true
         type: string
+      tag:
+        description: 'tag'
+        default: 'latest'
+        required: true
+        type: string
 
-env:
-  REPOSITORIES_URL: test
   
 jobs:
   build-and-deploy:
-    # runs-on: ubuntu-latest
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     - id: checkout
-      uses: actions/checkout@v3 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
-      # with:
-      #   persist-credentials: false
+      uses: actions/checkout@v4
     
-    # - id: clone_repository
-    #   name: Fetch dependent repository  
-    #   run: |  
-    #     echo ${{ inputs.repositories }}
-    #     git clone ${{ inputs.repositories }}
-    #     # 如果需要，您可以将克隆的仓库移动到适当的目录  
-    #     # mv png_nft_generator /path/to/destination
-        
+    - id: clone_repository
+      name: Fetch dependent repository  
+      run: |  
+        echo ${{ inputs.repositories }}
+        git clone ${{ inputs.repositories }}
+        # 对拉取的模板库重命名 
+        # mv png_nft_generator png_nft_csv_template     
 
     # - id: install_rust
     #   name: Install Rust
     #   # uses: dtolnay/rust-toolchain@stable
     #   uses: dtolnay/rust-toolchain@1.42.0
       
-    # - id: install_rust
-    #   name: Install Rust
-    #   uses: actions-rs/toolchain@v1
-    #   with:
-    #     profile: minimal
-    #     toolchain: stable
-    #     override: true
+    - id: install_rust
+      name: Install Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        toolchain: stable
+        override: true
       
     - id: build
       name: Install and Build
       run: |
-        source "$HOME/.cargo/env"
-        ls 
-        pwd
         echo "cargo build --target wasm32-wasi"
         rustup -V
         cargo version
     
+    # 成功通知
     - name: The clone_repository has failed
       if: ${{ failure() && steps.clone_repository.conclusion == 'failure' }}
       run: |
