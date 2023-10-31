@@ -62,6 +62,10 @@ jobs:
         cargo version
 
     #状态检查
+    - name: Dump steps context
+      env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+      run: echo "$STEPS_CONTEXT"
     
     - name: The job has succeeded
       if: ${{ success() }}
